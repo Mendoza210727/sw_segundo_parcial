@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- List View Definition for Colegio -->
+        <!-- <record model="ir.ui.view" id="colegio.list">
+            <field name="name">colegio.list</field>
+            <field name="model">colegio.colegio</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="telefono"/>
+                </tree>
+            </field>
+        </record> -->
+
+        <!-- Action Opening Views on Colegio Model -->
+        <!-- <record model="ir.actions.act_window" id="colegio.action_window">
+            <field name="name">Colegio</field>
+            <field name="res_model">colegio.colegio</field>
+            <field name="view_mode">tree,form</field>
+        </record> -->
+
+        <!-- Top Menu Item -->
+        <!-- <menuitem name="Colegio" id="colegio.menu_root"/> -->
+
+        <!-- Menu Categories -->
+        <!-- <menuitem name="Menu 1" id="colegio.menu_1" parent="colegio.menu_root"/> -->
+
+        <!-- Actions for Colegio -->
+        <!-- <menuitem name="List" id="colegio.menu_1_list" parent="colegio.menu_1" action="colegio.action_window"/> -->    
+        <!-- Actions for Inscripcion -->
+        <!-- <menuitem name="Inscripciones" id="colegio.menu_2_list" parent="colegio.menu_1" action="action_inscripcion"/> -->
+    </data>
+</odoo>

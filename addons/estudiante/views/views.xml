@@ -1,0 +1,599 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!-- vista para esudiante -->
+
+    <record model="ir.ui.view" id="estudiante_list">
+      <field name="name">estudiante.list</field>
+      <field name="model">estudiante.estudiante</field>
+      <field name="arch" type="xml">
+        <tree string="Estudiantes">
+          <field name="name" />
+          <field name="name_aula" string="Aula Asignada" />
+          <field name="cel" />
+          <field name="promedio_notas" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="estudiante_form">
+      <field name="name">estudiante.form</field>
+      <field name="model">estudiante.estudiante</field>
+      <field name="arch" type="xml">
+        <form string="Estudiante">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="cel" />
+              <field name="correo" />
+              <field name="fecha_nacimiento" />
+              <field name="direccion" />
+              <field name="name_infraestructura" />
+              <field name="name_tutor" />
+              <field name="profesor_asignado" />
+              <field name="nota" />
+            </group>
+            <notebook>
+              <page string="Mensualidades">
+                <field name="mensualidad_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="fecha_pago" />
+                    <field name="monto" />
+                    <field name="estado_pago" />
+                  </tree>   
+                </field>
+              </page>
+            </notebook>
+            <notebook>
+              <page string="Horarios">
+                <field name="horario_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="aula_id" />
+                    <field name="materia_id" />
+                    <field name="profesor_id" />
+                    <field name="dia_semana" />
+                    <field name="hora_inicio" />
+                    <field name="hora_fin" />
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="profesor_list">
+      <field name="name">profesor.list</field>
+      <field name="model">estudiante.profesor</field>
+      <field name="arch" type="xml">
+        <tree string="Profesores">
+          <field name="name" />
+          <field name="run" />
+          <field name="fecha_nacimiento" />
+          <field name="direccion" />
+          <field name="infraestructura" />
+          <field name="correo" />
+          <field name="celular" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="profesor_form">
+      <field name="name">profesor.form</field>
+      <field name="model">estudiante.profesor</field>
+      <field name="arch" type="xml">
+        <form string="Profesor">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="run" />
+              <field name="fecha_nacimiento" />
+              <field name="direccion" />
+              <field name="infraestructura" />
+              <field name="correo" />
+              <field name="celular" />
+              <field name="materia">
+                <tree string="Materias">
+                  <field name="name" />
+                  <field name="aula" />
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- vista para notas -->
+    <record model="ir.ui.view" id="nota_form">
+      <field name="name">nota.form</field>
+      <field name="model">estudiante.nota</field>
+      <field name="arch" type="xml">
+        <form string="Notas">
+          <sheet>
+            <group>
+              <field name="nota" />
+              <field name="estudiante" />
+              <field name="materia" />
+              <field name="profesor" />
+              <field name="descripcion" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="nota_list">
+      <field name="name">nota.tree</field>
+      <field name="model">estudiante.nota</field>
+      <field name="arch" type="xml">
+        <tree string="Notas">
+          <field name="estudiante" />
+          <field name="materia" />
+          <field name="nota" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- vista para materia -->
+    <!-- Vista de lista para Materia -->
+    <record model="ir.ui.view" id="materia_list">
+      <field name="name">materia.list</field>
+      <field name="model">estudiante.materia</field>
+      <field name="arch" type="xml">
+        <tree string="Materia">
+          <field name="name" />
+          <field name="grado" />
+          <field name="seccion" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista de formulario para Materia -->
+    <record model="ir.ui.view" id="materia_form">
+      <field name="name">materia.form</field>
+      <field name="model">estudiante.materia</field>
+      <field name="arch" type="xml">
+        <form string="Materia">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="grado" />
+              <field name="seccion" />
+              <field name="aula_ids"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- vista para infraestructura -->
+    <record model="ir.ui.view" id="infraestructura_list">
+      <field name="name">infraestructura.list</field>
+      <field name="model">estudiante.infraestructura</field>
+      <field name="arch" type="xml">
+        <tree string="infraestructura">
+          <field name="name" />
+          <field name="direccion" />
+          <field name="total_aulas" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="infraestructura_form">
+      <field name="name">infraestructura.form</field>
+      <field name="model">estudiante.infraestructura</field>
+      <field name="arch" type="xml">
+        <form string="infraestructura">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="nro_pisos" />
+              <field name="direccion" />
+              <field name="total_aulas" readonly="1" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- vista para aula -->
+    <record model="ir.ui.view" id="aula_list">
+      <field name="name">aula.list</field>
+      <field name="model">estudiante.aula</field>
+      <field name="arch" type="xml">
+        <tree string="Aula">
+          <field name="name" />
+          <field name="seccion" />
+          <field name="profesor_de_aula" />
+          <field name="total_estudiantes" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="aula_form">
+      <field name="name">aula.form</field>
+      <field name="model">estudiante.aula</field>
+      <field name="arch" type="xml">
+        <form string="Aula">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="grado" />
+              <field name="seccion" />
+              <field name="materia" widget="many2many_tags" options="{'no_create_edit': True}" />
+              <field name="total_estudiantes" />
+              <field name="nro_sillas" />
+              <field name="profesor_de_aula" />
+              <field name="name_infraestructura" /> <!-- Campo agregado -->
+              <field name="descripcion" />
+            </group>
+            <group>
+              <!-- <field name="estudiante" /> -->
+              <field name="estudiante" widget="many2many_tags" />
+              <field name="descripcion" />
+            </group>
+            <notebook>
+              <page string="Horarios">
+                <field name="horario_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="materia_id" />
+                    <field name="profesor_id" />
+                    <field name="dia_semana" />
+                    <field name="hora_inicio" />
+                    <field name="hora_fin" />
+                  </tree>
+                </field>
+              </page>
+              <page string="Estudiantes">
+                <field name="estudiante">
+                  <tree>
+                    <field name="name" />
+                    <field name="cel" />
+                    <field name="correo" />
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- Vista de lista para Tutor -->
+    <record model="ir.ui.view" id="tutor_list_view">
+      <field name="name">tutor.list</field>
+      <field name="model">estudiante.tutor</field>
+      <field name="arch" type="xml">
+        <tree string="Tutores">
+          <field name="name" />
+          <field name="cel" />
+          <field name="correo" />
+          <field name="direccion" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- Vista de formulario para Tutor -->
+    <record model="ir.ui.view" id="tutor_form_view">
+      <field name="name">tutor.form</field>
+      <field name="model">estudiante.tutor</field>
+      <field name="arch" type="xml">
+        <form string="Tutor">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="correo" />
+              <field name="direccion" />
+              <field name="cel" />
+              <button name="action_send_whatsapp" type="object" string="Enviar WhatsApp"
+                class="oe_highlight" />
+              <!-- <separator string=""/> -->
+            </group>
+            <notebook>
+              <page string="Estudiantes a Cargo">
+                <field name="estudiante_rel_ids">
+                  <tree editable="bottom">
+                    <field name="estudiante_id" />
+                    <field name="relacion" />
+                    <field name="relacion_otros"
+                      modifiers="{'invisible': [('relacion', '!=', 'otros')]}" />
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- vista de pagos -->
+    <record id="view_mensualidad_list" model="ir.ui.view">
+      <field name="name">mensualidad.list</field>
+      <field name="model">estudiante.mensualidad</field>
+      <field name="arch" type="xml">
+        <tree string="Mensualidades">
+          <field name="name" />
+          <field name="estudiante_id" />
+          <field name="fecha_pago" />
+          <field name="monto" />
+          <field name="estado_pago" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_mensualidad_form" model="ir.ui.view">
+      <field name="name">mensualidad.form</field>
+      <field name="model">estudiante.mensualidad</field>
+      <field name="arch" type="xml">
+        <form string="Mensualidad">
+          <sheet>
+            <group>
+              <field name="name" readonly="1" />
+              <field name="estudiante_id" />
+              <field name="fecha_pago" />
+              <field name="monto" />
+              <field name="estado_pago" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- vista de horarios -->
+    <record id="view_horario_list" model="ir.ui.view">
+      <field name="name">horario.list</field>
+      <field name="model">estudiante.horario</field>
+      <field name="arch" type="xml">
+        <tree string="Horarios">
+          <field name="name" />
+          <field name="aula_id" />
+          <field name="materia_id" />
+          <field name="profesor_id" />
+          <field name="dia_semana" />
+          <field name="hora_inicio" />
+          <field name="hora_fin" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_horario_form" model="ir.ui.view">
+      <field name="name">horario.form</field>
+      <field name="model">estudiante.horario</field>
+      <field name="arch" type="xml">
+        <form string="Horario">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="aula_id" />
+              <field name="materia_id" />
+              <field name="profesor_id" />
+              <field name="dia_semana" />
+              <field name="hora_inicio" />
+              <field name="hora_fin" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="estudiante.action_window">
+      <field name="name">Estudiante</field>
+      <field name="res_model">estudiante.estudiante</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.profesor_action_window">
+      <field name="name">profesor window</field>
+      <field name="res_model">estudiante.profesor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.materia_action_window">
+      <field name="name">materia window</field>
+      <field name="res_model">estudiante.materia</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.infraestructura_action_window">
+      <field name="name">infraestructura</field>
+      <field name="res_model">estudiante.infraestructura</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.aula_action_window">
+      <field name="name">Aula</field>
+      <field name="res_model">estudiante.aula</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.tutor_action_window">
+      <field name="name">Tutor</field>
+      <field name="res_model">estudiante.tutor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.nota_action_window">
+      <field name="name">nota</field>
+      <field name="res_model">estudiante.nota</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <record model="ir.actions.act_window" id="estudiante.tutor_estudiante_rel_window">
+      <field name="name">Tutor</field>
+      <field name="res_model">estudiante.tutor_estudiante_rel</field>
+      <field name="view_mode">tree,form</field>
+    </record> -->
+
+
+    <record id="seq_mensualidad" model="ir.sequence">
+      <field name="name">Mensualidad</field>
+      <field name="code">estudiante.mensualidad</field>
+      <field name="prefix">PAG/</field>
+      <field name="padding">5</field>
+      <field name="number_increment">1</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="estudiante.mesualidad_action_window">
+      <field name="name">Mensualidades</field>
+      <field name="res_model">estudiante.mensualidad</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Crear la primera mensualidad
+        </p>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="estudiante.horario_action_window">
+      <field name="name">Horarios</field>
+      <field name="res_model">estudiante.horario</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Crear el primer horario
+        </p>
+      </field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="estudiante.action_server">
+      <field name="name">estudiante server</field>
+      <field name="model_id" ref="model_estudiante_estudiante" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="estudiante.profesor_action_server">
+      <field name="name">estudiante profesor server</field>
+      <field name="model_id" ref="model_estudiante_profesor" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="estudiante.materia_action_server">
+      <field name="name">estudiante materia server</field>
+      <field name="model_id" ref="model_estudiante_materia" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="estudiante.aula_action_server">
+      <field name="name">estudiante aula server</field>
+      <field name="model_id" ref="model_estudiante_aula" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="estudiante.infraestructura_action_server">
+      <field name="name">estudiante infraestructura server</field>
+      <field name="model_id" ref="model_estudiante_infraestructura" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="estudiante.tutor_action_server">
+      <field name="name">estudiante tutor server</field>
+      <field name="model_id" ref="model_estudiante_tutor" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Gestión Academica" id="estudiante.menu_root" />
+
+    <!-- menu categories -->
+
+    <menuitem name="Administrador" id="estudiante.menu_3" parent="estudiante.menu_root" />
+    <menuitem name="Estudiante" id="estudiante.menu_1" parent="estudiante.menu_root" />
+    <menuitem name="Profesor" id="estudiante.menu_2" parent="estudiante.menu_root" />
+
+
+    <!-- actions -->
+
+    <!-- accion estudiante -->
+    <menuitem name="Estudiante" id="estudiante.menu_1_list" parent="estudiante.menu_1"
+      action="estudiante.action_window" />
+
+
+    <!-- accion profesor -->
+    <menuitem name="Profesor" id="estudiante.menu_1_list_profesor" parent="estudiante.menu_2"
+      action="estudiante.profesor_action_window" />
+
+    <menuitem name="nota" id="estudiante.menu_1_list_nota" parent="estudiante.menu_2"
+      action="estudiante.nota_action_window" />
+
+    <!-- acciones administrativas -->
+    <menuitem name="Materia" id="estudiante.menu_1_list_materia" parent="estudiante.menu_3"
+      action="estudiante.materia_action_window" />
+    <menuitem name="infraestructura" id="estudiante.menu_1_list_infraestructura"
+      parent="estudiante.menu_3"
+      action="estudiante.infraestructura_action_window" />
+    <menuitem name="Aula" id="estudiante.menu_1_list_aula" parent="estudiante.menu_3"
+      action="estudiante.aula_action_window" />
+    <menuitem name="tutor" id="estudiante.menu_1_list_tutor" parent="estudiante.menu_3"
+      action="estudiante.tutor_action_window" />
+
+    <menuitem name="Mensualidad" id="estudiante.menu_1_list_mensualidad" parent="estudiante.menu_3"
+      action="estudiante.mesualidad_action_window" />
+    <menuitem name="Horario" id="estudiante.menu_1_list_horario" parent="estudiante.menu_1"
+      action="estudiante.horario_action_window" />
+
+    <!-- <menuitem name="Relacion Tutor" id="estudiante.menu_1_tutor_estudiante_rel"
+      parent="estudiante.menu_3"
+      action="estudiante.tutor_estudiante_rel_window" /> -->
+  </data>
+</odoo>
